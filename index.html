@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda Informática GT</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- SweetAlert2 para alertas modernas -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- jsPDF para generar recibo en PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Tienda Informática GT</h1>
+      <p>Accesorios y componentes para computadora</p>
+    </div>
+    <div class="topbar-controls">
+      <label class="switch-wrap" for="themeToggle">
+        <span>Modo</span>
+        <input type="checkbox" id="themeToggle" />
+        <span class="switch"></span>
+      </label>
+
+      <label for="currencySelect">Moneda</label>
+      <select id="currencySelect">
+        <option value="GTQ">Quetzales (Q)</option>
+        <option value="USD">Dólares (USD)</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section>
+      <h2>Productos destacados</h2>
+      <div class="products" id="productsContainer">
+        <!-- Los productos se renderizan con JavaScript para facilitar el carrito y moneda -->
+      </div>
+    </section>
+
+    <aside class="cart-panel">
+      <h2>Carrito</h2>
+      <ul id="cartItems"></ul>
+
+      <div class="summary">
+        <p><strong>Total:</strong> <span id="cartTotal">Q0.00</span></p>
+      </div>
+
+      <div class="actions">
+        <button id="clearCartBtn" class="btn btn-secondary">Vaciar carrito</button>
+        <button id="checkoutBtn" class="btn btn-primary">Pagar</button>
+      </div>
+
+      <form id="paymentForm" class="payment-form" novalidate>
+        <h3>Datos de pago</h3>
+        <label>
+          Nombre completo
+          <input type="text" id="cardName" placeholder="Ej. Juan Pérez" required />
+        </label>
+        <label>
+          Número de tarjeta
+          <input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required />
+        </label>
+        <div class="inline-fields">
+          <label>
+            Fecha (MM/AA)
+            <input type="text" id="cardExpiry" maxlength="5" placeholder="08/29" required />
+          </label>
+          <label>
+            CVV
+            <input type="text" id="cardCvv" maxlength="4" placeholder="123" required />
+          </label>
+        </div>
+        <button type="submit" class="btn btn-success">Validar pago y generar recibo PDF</button>
+      </form>
+    </aside>
+  </main>
+
+  <footer>
+    <small>Simulación educativa de ecommerce de informática - Precios base en Quetzales</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
