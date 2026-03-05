@@ -662,6 +662,10 @@ function validatePaymentData() {
 }
 
 function generateInvoicePdf(invoiceData) {
+  if (!window.jspdf || typeof window.jspdf.jsPDF !== "function") {
+    throw new Error("jsPDF no esta disponible en la pagina.");
+  }
+
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: "mm", format: "a4" });
   const pageWidth = doc.internal.pageSize.getWidth();
@@ -754,12 +758,18 @@ function generateInvoicePdf(invoiceData) {
   const totalGTQ = subtotalGTQ + taxGTQ;
 
   const totalsBoxX = 126;
-  const totalsBoxY = Math.max(y + 6, 220);
   const totalsBoxWidth = 70;
   const lineHeight = 6;
+  const totalsHeight = lineHeight * 3 + 6;
+  let totalsBoxY = Math.max(y + 6, 220);
+
+  if (totalsBoxY + totalsHeight > 280) {
+    doc.addPage();
+    totalsBoxY = 30;
+  }
 
   doc.setDrawColor(220, 220, 220);
-  doc.rect(totalsBoxX, totalsBoxY, totalsBoxWidth, lineHeight * 3 + 6);
+  doc.rect(totalsBoxX, totalsBoxY, totalsBoxWidth, totalsHeight);
 
   doc.setFont("helvetica", "bold");
   doc.text("Subtotal:", totalsBoxX + 3, totalsBoxY + 6);
@@ -775,8 +785,9 @@ function generateInvoicePdf(invoiceData) {
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.5);
-  doc.text("Documento generado electronicamente.", 14, 286);
-  doc.text("Gracias por su compra.", pageWidth - 14, 286, { align: "right" });
+  const footerY = totalsBoxY + totalsHeight > 268 ? 282 : 286;
+  doc.text("Documento generado electronicamente.", 14, footerY);
+  doc.text("Gracias por su compra.", pageWidth - 14, footerY, { align: "right" });
 
   doc.save(`factura_${invoiceData.invoiceNumber}.pdf`);
 }
