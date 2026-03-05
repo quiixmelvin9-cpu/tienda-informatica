@@ -264,6 +264,11 @@ h2 {
   background: var(--secondary);
 }
 
+body.dark .btn-add {
+  color: #000;
+  background: #facc15;
+}
+
 .payment-form {
   border-top: 1px solid var(--line);
   padding-top: 0.8rem;

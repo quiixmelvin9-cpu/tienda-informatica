@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tienda Informática GT</title>
+  <title>Tienda Informatica GT</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- SweetAlert2 para alertas modernas -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- jsPDF para generar recibo en PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <header class="topbar">
     <div>
-      <h1>Tienda Informática GT</h1>
-      <p>Accesorios y componentes para computadora</p>
+      <h1>Tienda Informatica GT</h1>
+      <p>Catalogo de componentes y perifericos para computadora</p>
     </div>
     <div class="topbar-controls">
       <label class="switch-wrap" for="themeToggle">
@@ -26,17 +24,15 @@
       <label for="currencySelect">Moneda</label>
       <select id="currencySelect">
         <option value="GTQ">Quetzales (Q)</option>
-        <option value="USD">Dólares (USD)</option>
+        <option value="USD">Dolares (USD)</option>
       </select>
     </div>
   </header>
 
   <main class="layout">
     <section>
-      <h2>Productos destacados</h2>
-      <div class="products" id="productsContainer">
-        <!-- Los productos se renderizan con JavaScript para facilitar el carrito y moneda -->
-      </div>
+      <h2>Catalogo</h2>
+      <div class="products" id="productsContainer"></div>
     </section>
 
     <aside class="cart-panel">
@@ -56,32 +52,31 @@
         <h3>Datos de pago</h3>
         <label>
           Nombre completo
-          <input type="text" id="cardName" placeholder="Ej. Juan Pérez" required />
+          <input type="text" id="cardName" placeholder="Ej. Juan Perez" autocomplete="cc-name" required />
         </label>
         <label>
-          Número de tarjeta
-          <input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required />
+          Numero de tarjeta
+          <input type="text" id="cardNumber" maxlength="19" inputmode="numeric" pattern="[0-9 ]*" autocomplete="cc-number" placeholder="1234 5678 9012 3456" required />
         </label>
         <div class="inline-fields">
           <label>
             Fecha (MM/AA)
-            <input type="text" id="cardExpiry" maxlength="5" placeholder="08/29" required />
+            <input type="text" id="cardExpiry" maxlength="5" inputmode="numeric" autocomplete="cc-exp" placeholder="08/29" required />
           </label>
           <label>
             CVV
-            <input type="text" id="cardCvv" maxlength="4" placeholder="123" required />
+            <input type="text" id="cardCvv" maxlength="4" inputmode="numeric" autocomplete="cc-csc" placeholder="123" required />
           </label>
         </div>
-        <button type="submit" class="btn btn-success">Validar pago y generar recibo PDF</button>
+        <button type="submit" class="btn btn-success">Validar pago y generar factura PDF</button>
       </form>
     </aside>
   </main>
 
   <footer>
-    <small>Simulación educativa de ecommerce de informática - Precios base en Quetzales</small>
+    <small>Simulacion educativa de ecommerce de informatica - Precios base en Quetzales</small>
   </footer>
 
-  <!-- Modal de detalle de producto: se muestra al presionar una tarjeta -->
   <div id="productModal" class="product-modal hidden" aria-hidden="true">
     <div class="modal-overlay" id="modalOverlay"></div>
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
